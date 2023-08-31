@@ -8,15 +8,21 @@ function getUserNotes($id){
    
 }
 function create($data){
-    self::$db->insert('notes',$data);
+   return $this->query("INSERT INTO `notes` (`title`, `note`, `user_id`, `created_at`, `updated_at`) VALUES (?, ?, ?, NOW(), NOW())",$data);
 }
-function lastId(){
-    return self::$db->lastInsertId();
-}
+
 function delete($id){
     $id = @$id[0];
-    $this->query("DELETE FROM `notes` WHERE id = ?",array(@$id));
+   return $this->query("DELETE FROM `notes` WHERE id = ?",array(@$id));
 }
+function update($data){
+    return $this->query("UPDATE `notes` SET title=?,`note` = ? WHERE id = ?",$data);
+ }
+
+ function getById($id){
+    $query =  $this->query("select * from notes where id = ?",array($id));
+     return $query->fetch(\PDO::FETCH_ASSOC);
+ }
 }
 
 ?>

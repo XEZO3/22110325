@@ -83,13 +83,12 @@
         <?php unset($_SESSION['error']) ?>
 </div>
     <?php endif ?>
-    <form style="width: 100%;" action="<?=PATH?>/home/store" method="post">
+    <form style="width: 100%;" action="<?=PATH?>/home/update/<?=$note['id'] ??null ?>" method="post">
     <div class="container">
-        
             <div class="item">Title</div>
-            <div class="item item-input"><input type="text" placeholder="Note Title" name="title" ></div>
+            <div class="item item-input"><input type="text" placeholder="Note Title" name="title" value="<?=$note['title'] ?? 'error novalue'?>" ></div>
             <div class="item">Note</div>
-            <div class="item item-input"><textarea rows="10" name="note" required></textarea></div>
+            <div class="item item-input"><textarea rows="10" name="note" required><?=$note['note'] ?? 'error novalue'?></textarea></div>
             <button>Save</button>
         
     </div>

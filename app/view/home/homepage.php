@@ -57,6 +57,7 @@ position: relative;
 }
 
 #create{
+    transition: 1s;
    width: 300px;
    height: 300px;
    background-color:  rgba(255,255,255,0.15);
@@ -64,6 +65,14 @@ position: relative;
    justify-content: center;
    align-items: center;
    font-size: 6em; 
+}
+#create:hover{
+    transition: 1s;
+    background-color: white;
+}
+#create:hover i{
+    transition: 1s;
+    color: black;
 }
 .note-header{
     width:100%;
@@ -107,14 +116,14 @@ a{
 <div class="container">
     <div class="notes">
         <div id="create">
-        <i class="fa-solid fa-plus"></i>
+        <a href="<?=PATH?>/home/create"><i class="fa-solid fa-plus"></i></a>
         </div>
         <?php foreach($data as $item): ?>
         <div class="note">
-            <div class="note-header" >title</div>
+            <div class="note-header" ><?=$item['title']?></div>
            <?=$item['note']?>
            <div class="note-footer">
-                <a href="#"><i class="fa-regular fa-pen-to-square fa-xs"></i></a>
+                <a href="<?=PATH?>/home/edit/<?=$item['id']?>"><i class="fa-regular fa-pen-to-square fa-xs"></i></a>
                 <a href="<?=PATH?>/home/notedelete/<?=$item['id']?>"><i class="fa-solid fa-trash fa-xs"></i></a>
                 <a href="#"><i class="fa-solid fa-circle-info fa-xs"></i></a>
            </div>
