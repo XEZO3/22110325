@@ -1,29 +1,21 @@
-<html>
-<head><title><?= $title?></title></head>
-<script src="https://kit.fontawesome.com/7e7c44ffdf.js" crossorigin="anonymous"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+<?php 
+include("includes/navbar.php");
+?>
 <style>
-*{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-@import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
-body{
-    background-color: #2f363e;
-}
+
 .container{
-   width: 100%;
-   height: 100vh;
+   width: 90%;
+   height: 90vh;
    display: flex;
    justify-content: flex-start;
    align-items: flex-start;
    flex-wrap: wrap;
    gap: 60px;
-   padding: 50px; 
+   margin: auto;
+   margin-top: 1em;
+   
+    
+    
 }
 .container .notes{
     display: flex;
@@ -31,24 +23,25 @@ body{
     gap: 60px;
     justify-content: center;
     align-items: center;
-
 }
 
 .container .notes .note{
 
 width: 300px;
 height: 300px;
-background-color: #f7e98d;
+background-color: #26ff8f;
 box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-font-family: 'Handlee', cursive;
 position: relative;
+
 }
 
 
 .container .notes .note:hover .note-header{
     transition: 0.5s;
     display: block;
+
 }
+
 
 
 .container .notes .note:hover .note-footer{
@@ -57,7 +50,7 @@ position: relative;
 }
 
 #create{
-    transition: 1s;
+   transition: 1s;
    width: 300px;
    height: 300px;
    background-color:  rgba(255,255,255,0.15);
@@ -67,11 +60,11 @@ position: relative;
    font-size: 6em; 
 }
 #create:hover{
-    transition: 1s;
-    background-color: white;
+    transition: 0.5s;
+    background-color: #26ff8f;
 }
 #create:hover i{
-    transition: 1s;
+    transition: 0.5s;
     color: black;
 }
 .note-header{
@@ -105,27 +98,38 @@ position: relative;
     display: inline-block;
 }
 #create i{
-color: white;
+color: #26ff8f;
 }
 a{
     text-decoration: none;
     color: white;
 }
+
+@media (max-width:310px){
+    .container .notes .note{
+        width: 250px;
+        height: 250px;
+    }
+    
+    #create{
+        width: 250px;
+        height: 250px;
+    }
+}
+
 </style>
-<body>
 <div class="container">
     <div class="notes">
         <div id="create">
-        <a href="<?=PATH?>/home/create"><i class="fa-solid fa-plus"></i></a>
+        <a href="<?=PATH?>/note/create"><i class="fa-solid fa-plus"></i></a>
         </div>
         <?php foreach($data as $item): ?>
         <div class="note">
             <div class="note-header" ><?=$item['title']?></div>
-           <?=$item['note']?>
+           <div style="margin:5px"><?=$item['note']?></div>
            <div class="note-footer">
-                <a href="<?=PATH?>/home/edit/<?=$item['id']?>"><i class="fa-regular fa-pen-to-square fa-xs"></i></a>
-                <a href="<?=PATH?>/home/notedelete/<?=$item['id']?>"><i class="fa-solid fa-trash fa-xs"></i></a>
-                <a href="#"><i class="fa-solid fa-circle-info fa-xs"></i></a>
+                <a href="<?=PATH?>/note/edit/<?=$item['id']?>"><i class="fa-regular fa-pen-to-square fa-xs"></i></a>
+                <a href="<?=PATH?>/note/notedelete/<?=$item['id']?>"><i class="fa-solid fa-trash fa-xs"></i></a>
            </div>
         </div>
         <?php endforeach ?>

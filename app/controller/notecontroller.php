@@ -2,13 +2,20 @@
 namespace MVC\controller;
 
 use MVC\core\controller;
+use MVC\core\session;
 use MVC\model\note;
 
-class homecontroller extends controller{
+class notecontroller extends controller{
+    function __construct(){
+        if(!isset($_SESSION['id'])||empty($_SESSION['id'])){
+            header("location:".PATH."/user");
+            exit();
+        }
+    }
 
     function index(){
         $notes = new note;
-        $data = $notes->getUserNotes(1);       
+        $data = $notes->getUserNotes(session::get('id'));       
         return $this->view("home/homepage",["data"=>$data,'title'=>"homepage"]);
     }
     function notedelete($id){
@@ -30,15 +37,15 @@ class homecontroller extends controller{
         $error.="note is required";
        }
        if($error !=null){
-        $_SESSION['error'] = $error;
+        session::set('id',$error);
         header("location:".$_SERVER['HTTP_REFERER']);
         exit();
        }else{
-        $data = [htmlspecialchars($_POST['title']),htmlspecialchars($_POST['note']),1];
-        $notes = new note;
+        $data = [htmlspecialchars($_POST['title']),htmlspecialchars($_POST['note']),session::get('id')];
+        $notes = new note();
         $result = $notes->create($data);
         if(!$result){
-            $_SESSION['error'] = $error;
+            session::set('error',"something went wrong");
             header("location:".$_SERVER['HTTP_REFERER']);
             exit();
         }else{
@@ -65,7 +72,7 @@ class homecontroller extends controller{
          $error.="note is required";
         }
         if($error !=null){
-         $_SESSION['error'] = $error;
+            session::set('error',$error);
          header("location:".$_SERVER['HTTP_REFERER']);
          exit();
         }else{
@@ -73,7 +80,7 @@ class homecontroller extends controller{
          $notes = new note;
          $result = $notes->update($data);
          if(!$result){
-             $_SESSION['error'] = $error;
+            session::set('error',$error);
              header("location:".$_SERVER['HTTP_REFERER']);
              exit();
          }else{
@@ -82,6 +89,8 @@ class homecontroller extends controller{
          }
     }
 }
+
+    
 
 }
 

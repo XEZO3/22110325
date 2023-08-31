@@ -1,30 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title><?= $title ?></title>
-    <script src="https://kit.fontawesome.com/7e7c44ffdf.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Handlee', cursive;
-            background-color: #f3f3f3;
-            flex-direction: column;
-            gap: 20px;
-        }
+<?php 
+include("includes/navbar.php")
+?>
+
+
+<style>
+        
 
         .container {
             width: 60%;
             margin: auto;
-            background-color: #ffffff;
-            border: 1px solid #ccc;
+            background-color: transparent;
+            border: 2px solid #26ff8f;
             border-radius: 20px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             display: grid;
@@ -36,7 +22,7 @@
         .item {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #333;
+            color: white;
             align-self: center;
         }
 
@@ -59,12 +45,12 @@
 
         button {
             grid-column: 2/2;
-            width: 94%; /* Updated width */
+            width: 90%; /* Updated width */
             padding: 10px;
             border: none;
             border-radius: 10px;
-            background-color: #3498db;
-            color: #ffffff;
+            background-color: #26ff8f;
+            color: black;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
@@ -72,18 +58,50 @@
         }
 
         button:hover {
-            background-color: #2980b9;
+            background-color: transparent;
+            color: #26ff8f;
+            border: 1px solid #26ff8f;
+        }
+        .content{
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        @media (max-width:740px){
+            .container{
+                display: flex;
+                flex-direction: column;
+               
+                
+            }
+            .item{
+                width: 100%;
+                padding: 0;
+            }
+            .item-input input , .item-input textarea{
+                width: 100%;
+            }
+            button{
+                width: 100%;
+            }
+        }
+
+        @media (max-width:600px){
+            .container{
+                width: 95%;
+            }
         }
     </style>
-</head>
-<body>
+<div class="content">
     <?php if(isset($_SESSION['error'])&& !empty($_SESSION['error'])): ?>
     <div style="background-color: #DC3545;width:60%;height:80px;border-radius:20px;padding:10px;color:white">
         <?=$_SESSION['error']?>
         <?php unset($_SESSION['error']) ?>
 </div>
     <?php endif ?>
-    <form style="width: 100%;" action="<?=PATH?>/home/store" method="post">
+    <form style="width: 100%;" action="<?=PATH?>/note/store" method="post">
     <div class="container">
         
             <div class="item">Title</div>
@@ -94,5 +112,6 @@
         
     </div>
 </form>
+</div>
 </body>
 </html>
