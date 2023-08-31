@@ -5,7 +5,7 @@ include("includes/navbar.php");
 
 .container{
    width: 90%;
-   height: 90vh;
+   height: 87vh;
    display: flex;
    justify-content: flex-start;
    align-items: flex-start;
@@ -135,5 +135,8 @@ a{
         <?php endforeach ?>
     </div>
 </div>
+<?php
+include("includes/footer.php");
+?>
 </body>
 </html>

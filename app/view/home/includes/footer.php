@@ -1,15 +1,18 @@
 <style>
 .footer {
    position: fixed;
-   left: 0;
-   bottom: 0;
+   height: 50px;
    width: 100%;
-   background-color: red;
+   background-color: #26ff8f;
    color: white;
-   text-align: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: black;
+   font-size: 18px;
 }
 </style>
 
-<footer>
-
+<footer class="footer">
+&copy; 2023 Ezaldeen. All rights reserved. | Hello World
 </footer>

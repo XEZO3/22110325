@@ -67,7 +67,7 @@ include("includes/navbar.php")
             border: 1px solid #26ff8f;
         }
         .content{
-            height: 90vh;
+            height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -125,6 +125,9 @@ include("includes/navbar.php")
     </div>
 </form>
 </div>
+<?php
+include("includes/footer.php");
+?>
 <script>
     // Function to validate password and password repeat fields
     function validateForm() {
@@ -139,5 +142,6 @@ include("includes/navbar.php")
         return true; // Allow form submission
     }
 </script>
+
 </body>
 </html>

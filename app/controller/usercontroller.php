@@ -26,13 +26,13 @@ class usercontroller extends controller{
         $this->middleware();
         $error = "";
         if(empty($_POST['email'])){
-         $error.="username is required";
+         $error.="username is required\n";
         }
         if(empty($_POST['password'])){
-         $error.="password is required";
+         $error.="password is required\n";
         }
         if($error !=null){
-         $_SESSION['error'] = $error;
+         session::set("error",$error);
          header("location:".$_SERVER['HTTP_REFERER']);
          exit();
         }else{
@@ -48,12 +48,13 @@ class usercontroller extends controller{
                 header("location:".PATH."/note");
                 exit;
             }else{
-                header("location:".PATH."user");
+                session::set("error","username or password is incorrect");
+                header("location:".PATH."/user");
                 exit;
             }
             
         }else{
-            header("location:".PATH."user");
+            header("location:".PATH."/user");
             exit;
         }
     }
