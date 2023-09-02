@@ -65,7 +65,13 @@ class usercontroller extends controller{
         $error = "";
         if(empty($_POST['email'])){
          $error.="username is required";
-        }
+        }else{
+            $user = new users();
+           $existingUser = $user->getUserByEmail(htmlspecialchars($_POST['email']));
+           if ($existingUser) {
+               $error .= "Email is already taken. ";
+           }
+       }
         if(empty($_POST['password'])){
          $error.="password is required";
         }
