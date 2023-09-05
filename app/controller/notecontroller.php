@@ -16,7 +16,8 @@ class notecontroller extends controller{
     function index(){
         $notes = new note;
         $data = $notes->getUserNotes(session::get('id'));       
-        return $this->view("home/homepage",["data"=>$data,'title'=>"homepage"]);
+        $this->view("home/homepage",["data"=>$data,'title'=>"homepage"]);
+        
     }
     function notedelete($id){
         $notes = new note;
@@ -25,7 +26,7 @@ class notecontroller extends controller{
         exit(); 
     }
     function create(){
-        return $this->view("home/create",[]);
+        return $this->view("home/create",['title'=>"Create"]);
     }
     function store(){
 
@@ -37,8 +38,8 @@ class notecontroller extends controller{
         $error.="note is required";
        }
        if($error !=null){
-        session::set('id',$error);
-        header("location:".$_SERVER['HTTP_REFERER']);
+        session::set('error',$error);
+        header("location:/note/create");
         exit();
        }else{
         $data = [htmlspecialchars($_POST['title']),htmlspecialchars($_POST['note']),session::get('id')];
@@ -46,10 +47,10 @@ class notecontroller extends controller{
         $result = $notes->create($data);
         if(!$result){
             session::set('error',"something went wrong");
-            header("location:".$_SERVER['HTTP_REFERER']);
+            header("location:/note/create");
             exit();
         }else{
-            header("location:".PATH);
+            header("location:/");
             exit();
         }
        }
@@ -59,7 +60,10 @@ class notecontroller extends controller{
         $notes = new note;
         $id = @$id[0];
         $data = $notes->getById($id);
-        return $this->view("home/edit",['note'=>$data]);
+        if(@$data['user_id']!=session::get("id")){
+        $data = [];
+        }
+        return $this->view("home/edit",['note'=>$data,'title'=>"update"]);
 
     }
     function update($id){
@@ -73,7 +77,7 @@ class notecontroller extends controller{
         }
         if($error !=null){
             session::set('error',$error);
-         header("location:".$_SERVER['HTTP_REFERER']);
+        header("location:/note/edit/".$id);
          exit();
         }else{
          $data = [htmlspecialchars($_POST['title']),htmlspecialchars($_POST['note']),$id];
@@ -81,10 +85,10 @@ class notecontroller extends controller{
          $result = $notes->update($data);
          if(!$result){
             session::set('error',$error);
-             header("location:".$_SERVER['HTTP_REFERER']);
+            header("location:/note/edit/".$id);
              exit();
          }else{
-             header("location:".PATH);
+             header("location:/");
              exit();
          }
     }

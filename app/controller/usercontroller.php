@@ -16,11 +16,11 @@ class usercontroller extends controller{
     }
     public function index(){
         $this->middleware();
-        return $this->view("home/login",[]);
+        return $this->view("home/login",['title'=>"Login"]);
     }
     public function register(){
         $this->middleware();
-        return $this->view("home/signup",[]);
+        return $this->view("home/signup",['title'=>"Register"]);
     }
     public function login(){
         $this->middleware();
@@ -33,7 +33,7 @@ class usercontroller extends controller{
         }
         if($error !=null){
          session::set("error",$error);
-         header("location:".$_SERVER['HTTP_REFERER']);
+         header("location:/user");
          exit();
         }else{
         $email = htmlspecialchars($_POST['email']);
@@ -66,12 +66,12 @@ class usercontroller extends controller{
         if(empty($_POST['email'])){
          $error.="username is required";
         }else{
-            $user = new users();
-           $existingUser = $user->getUserByEmail(htmlspecialchars($_POST['email']));
-           if ($existingUser) {
-               $error .= "Email is already taken. ";
-           }
-       }
+             $user = new users();
+            $existingUser = $user->getUserByEmail(htmlspecialchars($_POST['email']));
+            if ($existingUser) {
+                $error .= "Email is already taken. ";
+            }
+        }
         if(empty($_POST['password'])){
          $error.="password is required";
         }
@@ -82,8 +82,8 @@ class usercontroller extends controller{
             $error.="password_confarmation is required";
         }
         if($error !=null){
-         $_SESSION['error'] = $error;
-         header("location:".$_SERVER['HTTP_REFERER']);
+          session::set('error',$error);
+          header("location:/user/register");
          exit();
         }else{
            $password =password_hash($_POST['password'], PASSWORD_DEFAULT);         
@@ -92,7 +92,7 @@ class usercontroller extends controller{
            $result = $user->create($data);
            if(!$result){
             session::set('error',"something went wrong");
-            header("location:".$_SERVER['HTTP_REFERER']);
+            header("location:/user/register");
             exit();
         }else{
             header("location:".PATH."/user");

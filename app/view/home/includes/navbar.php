@@ -1,11 +1,22 @@
 
-<html>
-<head><title></title>
+<html lang="en">
+<head>
+<title><?=$title ?? "savenotes"?></title>
 <script src="https://kit.fontawesome.com/7e7c44ffdf.js" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="https://simpleicon.com/wp-content/uploads/note.png" type="image/x-icon">
+<meta name="description" content="Register and save your notes with SaveNotes, your go-to note-saving system. Effortlessly manage your personal notes, to-dos, and reminders. Join us for a streamlined note-taking experience today!">
+<meta name="keywords" content="note system, note-taking, save notes, personal notes, to-dos, reminders, SaveNotes community">
+<meta property="og:title" content="Register and Save Notes with SaveNotes">
+<meta property="og:description" content="Effortlessly manage your personal notes, to-dos, and reminders with SaveNotes, your premier note-saving system. Join us for a streamlined note-taking experience today!">
+<meta name="twitter:title" content="Register and Save Notes with SaveNotes">
+<meta name="twitter:description" content="Effortlessly manage your personal notes, to-dos, and reminders with SaveNotes, your premier note-saving system. Join us for a streamlined note-taking experience today!">
+<meta name="author" content="Ezaldeen alayed">
+<meta charset="UTF-8">
+
+
 <style>
   *{
         margin: 0;

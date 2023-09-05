@@ -39,10 +39,10 @@ class app{
             if(method_exists($controller,$this->method)){
                 call_user_func([$controller,$this->method],$this->params);
             }else{
-                echo"url error";
+                echo"<h1> error 404 not fount</h1><a href='/' style='font-size:50px'>back to home page</a>";
             }
         }else{
-            echo"error ";
+             echo"<h1> error 404 not fount</h1><a href='/' style='font-size:50px'>back to home page</a>";
         }
     }
 }
